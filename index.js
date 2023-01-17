@@ -59,11 +59,11 @@ app.post('/api/courses/', (request, response) => {
 // PUT REQUESTS //
 
 app.put('/api/courses/:id', (request, response) => {
-    const course = courses.find(c => c.id === parseInt(request.params.id)); // Mosh's find course logic
-    if (!course) { response.status(404).send(`Course #${parseInt(request.params.id)} not found`); return; };
+    let course_id = parseInt(request.params.id);
+    if (!courses[course_id]) { response.status(404).send(`Course #${course_id} not found`); return; };
     // 404 response if course isn't found 
 
-    const {error} = validateCourse(request.body); // error validations
+    const {error} = validateCourse(request.body); // if course is found, do validations
     if (error) { response.status(400).send(error.details[0].message); return; }; // return if error
 
     course.name = request.body.name; // update name
