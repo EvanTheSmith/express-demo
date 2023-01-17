@@ -1,6 +1,7 @@
 const express = require('express');
 const res = require('express/lib/response');
 const app = express();
+app.use(express.json()); // this enables middleware for request processes, allowing JSON to work
 
 const courses = [
     {id: 0, name: "Composition", professor: "John"},
@@ -37,4 +38,16 @@ app.get('/api/courses/:id', (request, response) => {
     let course_id = parseInt(request.params.id);
     if (courses[course_id]) response.send(courses[course_id]);
     else response.status(404).send("course not found");
+});
+
+// POST REQUESTS //
+
+app.post('/api/courses/', (request, response) => {
+    const course = {
+        id: courses.length + 1, // generate an id in lieu of a database doing this for us
+        name: request.body.name,
+        professor: request.body.professor
+    };
+    courses.push(course); // add the new course to the courses variable
+    response.send(course); // return the new course back to the client
 });
