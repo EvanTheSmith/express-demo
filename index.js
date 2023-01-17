@@ -73,6 +73,7 @@ app.put('/api/courses/:id', (request, response) => {
 });
 
 function validateCourse(course) {
+    // this function depends on the Joi class
     const schema = { name: Joi.string().min(3).required(), professor: Joi.string().min(3).required()};
     return Joi.validate(course, schema);
 }
