@@ -9,9 +9,9 @@ const app = express();
 // app.delete()
 /////////////////////////////////////////////////////////////////
 
-
 // this tells our app to host a server on post 3000 and listen for requests
-app.listen(3000, () => console.log('Listening on port # 3000'));
+const port = process.env.PORT || 3000;
+app.listen(port, () => console.log(`Listening on port # ${port}`));
 
 // this gives our app a response to send the user when the user visits the root directory '/'
 app.get('/', (request, response) => response.send('Hello world!'));
@@ -19,3 +19,6 @@ app.get('/', (request, response) => response.send('Hello world!'));
 // another potential response, this time for a subdirectory of simulated courses
 app.get('/api/courses', (request, response) => response.send([1, 2, 3]));
 
+// on Windows, use "set" to setup an environment variable; on Mac, use "export"
+// in this app, I used `export PORT=4000' to setup the environment variable for PORT
+// to view all environment variables: console.log(process.env);
