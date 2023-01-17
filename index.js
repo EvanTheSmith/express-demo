@@ -14,7 +14,7 @@ const app = express();
 app.listen(3000, () => console.log('Listening on port # 3000'));
 
 // this gives our app a response to send the user when the user visits the root directory '/'
-app.get('/', (request, response) => response.send('Hello world.'));
+app.get('/', (request, response) => response.send('Hello world!'));
 
 // another potential response, this time for a subdirectory of simulated courses
 app.get('/api/courses', (request, response) => response.send([1, 2, 3]));
