@@ -47,7 +47,7 @@ app.post('/api/courses/', (request, response) => {
     if (error) { response.status(400).send(error.details[0].message); return; }; // return if error
 
     const course = {
-        id: courses.length + 1, // generate an id in lieu of a database doing this for us
+        id: courses.length, // generate an id in lieu of a database doing this for us
         name: request.body.name,
         professor: request.body.professor
     };
