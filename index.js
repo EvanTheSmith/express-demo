@@ -46,19 +46,19 @@ app.get('/api/courses/:id', (request, response) => {
 app.post('/api/courses/', (request, response) => {
     const schema = {
         name: Joi.string().min(3).required(),
-        professcor: Joi.string().min(3).required()
+        professor: Joi.string().min(3).required()
     };
 
     const result = Joi.validate(request.body, schema); // validations
 
-    if (result.error) { response.status(400).send(result.error); return; }; // catch if validations fail
+    if (result.error) { response.status(400).send(result.error.details[0].message); return; }; // catch if validations fail
 
     const course = {
         id: courses.length + 1, // generate an id in lieu of a database doing this for us
         name: request.body.name,
         professor: request.body.professor
     };
-    
+
     courses.push(course); // add the new course to the courses variable
     response.send(course); // return the new course back to the client
 });
