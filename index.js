@@ -1,6 +1,5 @@
 const Joi = require('joi'); // capital J because Joi is a class // this library does validations for us
 const express = require('express');
-const res = require('express/lib/response');
 const app = express();
 app.use(express.json()); // this enables middleware for request processes, allowing JSON to work
 
@@ -38,20 +37,14 @@ app.get('/api/courses', (request, response) => response.send(courses));
 app.get('/api/courses/:id', (request, response) => {
     let course_id = parseInt(request.params.id);
     if (courses[course_id]) response.send(courses[course_id]);
-    else response.status(404).send("course not found");
+    else response.status(404).send(`course #${course_id} not found`);
 });
 
 // POST REQUESTS //
 
-app.post('/api/courses/', (request, response) => {
-    const schema = {
-        name: Joi.string().min(3).required(),
-        professor: Joi.string().min(3).required()
-    };
-
-    const result = Joi.validate(request.body, schema); // validations
-
-    if (result.error) { response.status(400).send(result.error.details[0].message); return; }; // catch if validations fail
+app.post('/api/courses/', (request, response) => { 
+    const {error} = validateCourse(request.body); // error validations
+    if (error) { response.status(400).send(error.details[0].message); return; }; // return if error
 
     const course = {
         id: courses.length + 1, // generate an id in lieu of a database doing this for us
@@ -62,3 +55,24 @@ app.post('/api/courses/', (request, response) => {
     courses.push(course); // add the new course to the courses variable
     response.send(course); // return the new course back to the client
 });
+
+// PUT REQUESTS //
+
+app.put('/api/courses/:id', (request, response) => {
+    const course = courses.find(c => c.id === parseInt(request.params.id)); // Mosh's find course logic
+    if (!course) { response.status(404).send(`Course #${parseInt(request.params.id)} not found`); return; };
+    // 404 response if course isn't found 
+
+    const {error} = validateCourse(request.body); // error validations
+    if (error) { response.status(400).send(error.details[0].message); return; }; // return if error
+
+    course.name = request.body.name; // update name
+    course.professor = request.body.professor; // update professor
+
+    response.send(course);
+});
+
+function validateCourse(course) {
+    const schema = { name: Joi.string().min(3).required(), professor: Joi.string().min(3).required()};
+    return Joi.validate(course, schema);
+}
