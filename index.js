@@ -38,8 +38,8 @@ app.get('/api/courses', (request, response) => response.send(courses));
 
 app.get('/api/courses/:id', (request, response) => {
     let course_id = parseInt(request.params.id);
-    if (courses[course_id]) response.send(courses[course_id]);
-    else response.status(404).send(`course #${course_id} not found`);
+    if (!courses[course_id]) return response.status(404).send(`course #${course_id} not found`);
+    response.send(courses[course_id]);
 });
 
 // POST 
