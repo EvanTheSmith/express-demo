@@ -21,7 +21,9 @@ const courses = [
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`Listening on port # ${port}`));
 
-// this gives our app a response to send the user when the user visits the root directory '/'
+// GET
+
+// this gives our app a response to send the client when the user visits the root directory '/'
 app.get('/', (request, response) => response.send('Hello world!'));
 
 // another potential response, this time for a subdirectory of simulated courses
@@ -40,11 +42,11 @@ app.get('/api/courses/:id', (request, response) => {
     else response.status(404).send(`course #${course_id} not found`);
 });
 
-// POST REQUESTS //
+// POST 
 
 app.post('/api/courses/', (request, response) => { 
     const {error} = validateCourse(request.body); // error validations
-    if (error) { response.status(400).send(error.details[0].message); return; }; // return if error
+    if (error) return response.status(400).send(error.details[0].message); // return if error
 
     const course = {
         id: courses.length, // generate an id in lieu of a database doing this for us
@@ -56,15 +58,15 @@ app.post('/api/courses/', (request, response) => {
     response.send(course); // return the new course back to the client
 });
 
-// PUT REQUESTS //
+// PUT 
 
 app.put('/api/courses/:id', (request, response) => {
     let course_id = parseInt(request.params.id);
-    if (!courses[course_id]) { response.status(404).send(`Course #${course_id} not found`); return; };
+    if (!courses[course_id]) return response.status(404).send(`Course #${course_id} not found`);
     // 404 response if course isn't found 
 
     const {error} = validateCourse(request.body); // if course is found, do validations
-    if (error) { response.status(400).send(error.details[0].message); return; }; // return if error
+    if (error) return response.status(400).send(error.details[0].message); // return if error
 
     course.name = request.body.name; // update name
     course.professor = request.body.professor; // update professor
@@ -72,8 +74,20 @@ app.put('/api/courses/:id', (request, response) => {
     response.send(course);
 });
 
-function validateCourse(course) {
+function validateCourse(course) { // function used by PUT and POST requests
     // this function depends on the Joi class
     const schema = { name: Joi.string().min(3).required(), professor: Joi.string().min(3).required()};
     return Joi.validate(course, schema);
 }
+
+// DELETE
+
+app.delete('/api/courses/:id', (request, response) => {
+    const course = courses.find(c => c.id === parseInt(request.params.id));
+    if (!course) return response.status(404).send(`Course #${request.params.id} not found`);
+
+    const index = courses.indexOf(course);
+    courses.splice(index, 1);
+
+    response.send(course);
+});
