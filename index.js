@@ -8,6 +8,11 @@ app.use(express.json()); // this parses the request and, if there is a JSON obje
 // app.use(evan_middleware); // this just logs to the console
 app.use(express.static('local_files')); // this allows files in the "local_files" folder to be accessed on the server
                                         // e.g. http://localhost:3000/pokemon.txt
+if (app.get('env') === 'development') {
+    // any code (e.g. middleware) placed in here will only run in the development environment
+    // to switch environment, change the environment variable in the console
+    // e.g. export NODE_ENV=production
+}
 
 const courses = [
     {id: 0, name: "Composition", professor: "John"},
