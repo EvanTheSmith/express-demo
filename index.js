@@ -4,8 +4,8 @@ const evan_middleware = require('./evan');
 const app = express();
 
 // Middleware
-app.use(express.json()); // this enables middleware for request processes, allowing JSON to work
-app.use(evan_middleware);
+app.use(express.json()); // this parses the request and, if there is a JSON object, parses it and populates request.body
+app.use(evan_middleware); // this just logs to the console
 
 const courses = [
     {id: 0, name: "Composition", professor: "John"},
