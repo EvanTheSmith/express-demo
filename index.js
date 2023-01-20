@@ -1,7 +1,11 @@
 const Joi = require('joi'); // capital J because Joi is a class // this library does validations for us
 const express = require('express');
+const evan_middleware = require('./evan');
 const app = express();
+
+// Middleware
 app.use(express.json()); // this enables middleware for request processes, allowing JSON to work
+app.use(evan_middleware);
 
 const courses = [
     {id: 0, name: "Composition", professor: "John"},
