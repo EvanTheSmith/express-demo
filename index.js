@@ -5,7 +5,9 @@ const app = express();
 
 // Middleware
 app.use(express.json()); // this parses the request and, if there is a JSON object, parses it and populates request.body
-app.use(evan_middleware); // this just logs to the console
+// app.use(evan_middleware); // this just logs to the console
+app.use(express.static('local_files')); // this allows files in the "local_files" folder to be accessed on the server
+                                        // e.g. http://localhost:3000/pokemon.txt
 
 const courses = [
     {id: 0, name: "Composition", professor: "John"},
