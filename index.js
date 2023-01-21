@@ -1,3 +1,4 @@
+const config = require('config');
 const Joi = require('joi'); // capital J because Joi is a class // this library does validations for us
 const express = require('express');
 const evan_middleware = require('./evan');
