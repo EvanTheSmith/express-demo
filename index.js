@@ -4,6 +4,10 @@ const express = require('express');
 const evan_middleware = require('./evan');
 const app = express();
 
+// Configuration Testing
+console.log(`Application Name: ${config.get('name')}`);
+console.log(`Mail Server Name: ${config.get('mail.host')}`);
+
 // Middleware
 app.use(express.json()); // this parses the request and, if there is a JSON object, parses it and populates request.body
 // app.use(evan_middleware); // this just logs to the console
