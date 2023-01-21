@@ -1,5 +1,5 @@
 const startupDebugger = require('debug')('app:startup'); // coincides with export DEBUG=app:startup
-const dbDebugger = require('debug')('app:db');
+const dbDebugger = require('debug')('app:db'); // to turn off all debugging, use export DEBUG=
 const config = require('config');
 const Joi = require('joi'); // capital J because Joi is a class // this library does validations for us
 const express = require('express');
