@@ -1,3 +1,5 @@
+const startupDebugger = require('debug')('app:startup'); // coincides with export DEBUG=app:startup
+const dbDebugger = require('debug')('app:db');
 const config = require('config');
 const Joi = require('joi'); // capital J because Joi is a class // this library does validations for us
 const express = require('express');
@@ -18,6 +20,7 @@ if (app.get('env') === 'development') {
     // any code (e.g. middleware) placed in here will only run in the development environment
     // to switch environment, change the environment variable in the console
     // e.g. export NODE_ENV=production
+    startupDebugger("this comment should only show in development mode with debugger enabled");
 }
 
 const courses = [
