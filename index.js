@@ -7,6 +7,10 @@ const express = require('express');
 const evan_middleware = require('./evan');
 const app = express();
 
+// Templating Engine
+app.set('view engine', 'pug'); // this replaces the need to "require" the module pug
+
+
 // Configuration Testing
 console.log(`Application Name: ${config.get('name')}`);
 console.log(`Mail Server Name: ${config.get('mail.host')}`);
