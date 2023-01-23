@@ -1,6 +1,6 @@
 {
-    "name": "Express App Dev Environment",
+    "name": "Express App - Development",
     "mail": {
-        "host": "dev server"
+        "host": "dev-mail-server"
     }
 }

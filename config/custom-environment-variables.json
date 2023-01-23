@@ -1,6 +1,6 @@
 {
+    "comment": "this file MUST be named custom-environment-variables",
     "mail": {
         "password": "xpdemo_password"
-    },
-    "comment": "the name of this file MUST be custom-environment-variables"
+    }
 }

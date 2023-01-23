@@ -1,6 +1,6 @@
 {
-    "name": "Express App Prod Environment",
+    "name": "Express App - Production",
     "mail": {
-        "host": "prod server"
+        "host": "prod-mail-server"
     }
 }
