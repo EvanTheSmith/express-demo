@@ -4,7 +4,7 @@ const dbDebugger = require('debug')('app:db'); // to turn off all debugging, use
 const config = require('config');
 const Joi = require('joi'); // capital J because Joi is a class // this library does validations for us
 const express = require('express');
-const evan_middleware = require('./evan');
+const evan_middleware = require('./evan'); // currently not used
 const app = express();
 
 // Templating Engine
@@ -13,9 +13,9 @@ app.set('view engine', 'pug'); // this replaces the need to "require" the module
 
 
 // Configuration Testing
-console.log(`Application Name: ${config.get('name')}`);
-console.log(`Mail Server Name: ${config.get('mail.host')}`);
-console.log(`Mail Password: ${config.get('mail.password')}`);
+// console.log(`Application Name: ${config.get('name')}`);
+// console.log(`Mail Server Name: ${config.get('mail.host')}`);
+// console.log(`Mail Password: ${config.get('mail.password')}`);
 
 // Middleware
 app.use(express.json()); // this parses the request and, if there is a JSON object, parses it and populates request.body
