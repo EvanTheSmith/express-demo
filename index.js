@@ -50,7 +50,10 @@ app.listen(port, () => console.log(`Listening on port # ${port}`));
 // GET
 
 // this gives our app a response to send the client when the user visits the root directory '/'
-app.get('/', (request, response) => response.send('Hello world!'));
+app.get('/', (request, response) => {
+    // response.send('Hello world!')
+    response.render('index', {title: "Express Demo App", message: "Hello World"}); // a pug template, passed with an object holding 2 variables
+});
 
 // another potential response, this time for a subdirectory of simulated courses
 app.get('/api/courses', (request, response) => response.send(courses));
