@@ -9,6 +9,7 @@ const app = express();
 
 // Templating Engine
 app.set('view engine', 'pug'); // this replaces the need to "require" the module pug
+// app.set('views', './views'); // this is set by default
 
 
 // Configuration Testing
