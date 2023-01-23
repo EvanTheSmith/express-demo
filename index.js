@@ -15,7 +15,7 @@ app.set('view engine', 'pug'); // this replaces the need to "require" the module
 // Configuration Testing
 console.log(`Application Name: ${config.get('name')}`);
 console.log(`Mail Server Name: ${config.get('mail.host')}`);
-console.log(`Mail Password: ${config.get('mail.password')}`);
+// console.log(`Mail Password: ${config.get('mail.password')}`); // commented out because mail.password stopped working
 
 // Middleware
 app.use(express.json()); // this parses the request and, if there is a JSON object, parses it and populates request.body
