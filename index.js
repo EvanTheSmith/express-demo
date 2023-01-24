@@ -31,13 +31,6 @@ if (app.get('env') === 'development') {
     startupDebugger("this comment should only show in development mode with debugger enabled");
 }
 
-const courses = [
-    {id: 0, name: "Composition", professor: "John"},
-    {id: 1, name: "Sociology", professor: "Raj"},
-    {id: 2, name: "US History 2", professor: "Jay"},
-    {id: 3, name: "Biology", professor: "Holly"}
-];
-
 // this tells our app to host a server on post 3000 and listen for requests
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`Listening on port # ${port}`));

@@ -8,18 +8,26 @@ function validateCourse(course) {
     return Joi.validate(course, schema);
 }
 
+const courses = [
+    {id: 0, name: "Composition", professor: "John"},
+    {id: 1, name: "Sociology", professor: "Raj"},
+    {id: 2, name: "US History 2", professor: "Jay"},
+    {id: 3, name: "Biology", professor: "Holly"}
+];
+
 // All Coursess
-router.get('/api/courses', (request, response) => response.send(courses));
+// OLD: router.get('/api/courses' ... routes are truncated thanks to "app.use('/api/courses'"" in index.js
+router.get('/', (request, response) => response.send(courses));
 
 // One Course
-router.get('/api/courses/:id', (request, response) => {
+router.get('/:id', (request, response) => {
     let course_id = parseInt(request.params.id);
     if (!courses[course_id]) return response.status(404).send(`course #${course_id} not found`);
     response.send(courses[course_id]);
 });
 
 // POST 
-router.post('/api/courses/', (request, response) => { 
+router.post('/', (request, response) => { 
     const {error} = validateCourse(request.body); // error validations
     if (error) return response.status(400).send(error.details[0].message); // return if error
 
@@ -34,7 +42,7 @@ router.post('/api/courses/', (request, response) => {
 });
 
 // PUT 
-router.put('/api/courses/:id', (request, response) => {
+router.put('/:id', (request, response) => {
     let course_id = parseInt(request.params.id);
     if (!courses[course_id]) return response.status(404).send(`Course #${course_id} not found`);
     // 404 response if course isn't found 
@@ -49,7 +57,7 @@ router.put('/api/courses/:id', (request, response) => {
 });
 
 // DELETE
-router.delete('/api/courses/:id', (request, response) => {
+router.delete('/:id', (request, response) => {
     const course = courses.find(c => c.id === parseInt(request.params.id));
     if (!course) return response.status(404).send(`Course #${request.params.id} not found`);
 
