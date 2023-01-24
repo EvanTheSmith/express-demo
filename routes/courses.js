@@ -8,7 +8,7 @@ function validateCourse(course) {
     return Joi.validate(course, schema);
 }
 
-// All Courses
+// All Coursess
 router.get('/api/courses', (request, response) => response.send(courses));
 
 // One Course
@@ -58,3 +58,5 @@ router.delete('/api/courses/:id', (request, response) => {
 
     response.send(course);
 });
+
+module.exports = router;
