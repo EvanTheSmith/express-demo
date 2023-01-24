@@ -1,6 +1,6 @@
 const express = require('express');
 // const app = express(); // this format does NOT work when separating routes into own file.
-const router = require('express').Router(); // MUST use Router, not App as shown above
+const router = express.Router(); // MUST use Router, not App as shown above
 
 function validateCourse(course) { 
     // this function depends on the Joi class

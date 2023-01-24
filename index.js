@@ -4,7 +4,13 @@ const dbDebugger = require('debug')('app:db'); // to turn off all debugging, use
 const config = require('config');
 const Joi = require('joi'); // capital J because Joi is a class // this library does validations for us
 const express = require('express');
+
+// Routes
+const home = require('./routes/home.js');
+app.use('/', home);
 const courses = require('./routes/courses.js');
+app.use('/api/courses', courses); // for any routes starting with 'api/courses', use my courses module router
+
 const evan_middleware = require('./evan'); // currently not used
 const app = express();
 
@@ -22,7 +28,7 @@ app.use(express.json()); // this parses the request and, if there is a JSON obje
 // app.use(evan_middleware); // this just logs to the console
 app.use(express.static('local_files')); // this allows files in the "local_files" folder to be accessed on the server
                                         // e.g. http://localhost:3000/pokemon.txt
-app.use('/api/courses', courses); // for any routes starting with 'api/courses', use my courses module router
+
 
 if (app.get('env') === 'development') {
     // any code (e.g. middleware) placed in here will only run in the development environment
