@@ -20,13 +20,5 @@ app.use(express.json()); // this parses the request and, if there is a JSON obje
 app.use('/', home);
 // app.use('/api/courses', courses); // for any routes starting with 'api/courses', use my courses module router
 
-if (app.get('env') === 'development') {
-    // any code (e.g. middleware) placed in here will only run in the development environment
-    // to switch environment, change the environment variable in the console
-    // e.g. export NODE_ENV=production
-    startupDebugger("this comment should only show in development mode with debugger enabled");
-}
-
-// this tells our app to host a server on post 3000 and listen for requests
-const port = process.env.PORT || 3000;
-app.listen(port, () => console.log(`Listening on port # ${port}`));
+const port = process.env.PORT || 3000; 
+app.listen(port, () => console.log(`Listening on port # ${port}`)); // this tells our app to host a server on post 3000 and listen for requests

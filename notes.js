@@ -16,3 +16,10 @@ console.log(process.env);
 
 // Route Parameter : '/2018' in browser, ':year' (or any name) in backend (stored in request.params)
 // Query String Parameter : '?somethingElse=true' in browser (stored in request.query)
+
+if (app.get('env') === 'development') {
+    // any code (e.g. middleware) placed in here will only run in the development environment
+    // to switch environment, change the environment variable in the console
+    // e.g. export NODE_ENV=production
+    startupDebugger("this comment should only show in development mode with debugger enabled");
+}
