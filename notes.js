@@ -1,6 +1,7 @@
 // COPIED FROM index.js
 
 // Configuration Testing
+const config = require('config');
 console.log(`Application Name: ${config.get('name')}`);
 console.log(`Mail Server Name: ${config.get('mail.host')}`);
 console.log(`Mail Password: ${config.get('mail.password')}`);
