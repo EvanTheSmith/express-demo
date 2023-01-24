@@ -18,7 +18,7 @@ app.set('view engine', 'pug'); // this replaces the need to "require" the module
 // Middleware
 app.use(express.json()); // this parses the request and, if there is a JSON object, parses it and populates request.body
 app.use('/', home);
-app.use('/api/courses', courses); // for any routes starting with 'api/courses', use my courses module router
+// app.use('/api/courses', courses); // for any routes starting with 'api/courses', use my courses module router
 
 if (app.get('env') === 'development') {
     // any code (e.g. middleware) placed in here will only run in the development environment
